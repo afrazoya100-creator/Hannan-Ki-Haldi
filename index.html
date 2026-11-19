@@ -1,0 +1,546 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hanna's Haldi Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #edf4fc;
+  color: #19385e;
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 18px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at center,
+    #ffffff 0%,
+    #e5effb 65%,
+    #b9d0ec 100%
+  );
+}
+
+.invitation {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 540px);
+  padding: 44px 24px;
+  text-align: center;
+  border: 2px solid #648bb9;
+  outline: 1px solid #648bb9;
+  outline-offset: 7px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 15px 45px rgba(25, 56, 94, 0.15);
+}
+
+.bismillah {
+  font-size: 29px;
+  margin: 20px 0 12px;
+  color: #315b8c;
+  line-height: 1.8;
+}
+
+.intro {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin: 18px 0 12px;
+  color: #557ba8;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 12vw, 76px);
+  font-weight: 400;
+  color: #315b8c;
+  line-height: 1.2;
+  margin: 8px 0;
+}
+
+.subtitle {
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 13px;
+  margin: 14px 0 24px;
+  color: #315b8c;
+}
+
+.message {
+  font-size: 21px;
+  line-height: 1.55;
+  margin: 12px auto 22px;
+  max-width: 390px;
+}
+
+.divider {
+  color: #7198c5;
+  margin: 18px auto;
+  letter-spacing: 7px;
+}
+
+.details {
+  font-size: 21px;
+  line-height: 1.8;
+}
+
+.details strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #315b8c;
+  display: block;
+  margin-top: 12px;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: 1px solid #648bb9;
+  color: #19385e;
+  background: #edf4fc;
+  text-decoration: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: 0.25s;
+}
+
+.map-link:hover {
+  background: #c9dcf2;
+}
+
+.countdown-title {
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  margin: 28px 0 12px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.time-box {
+  min-width: 62px;
+  padding: 10px 7px;
+  background: #edf4fc;
+  border: 1px solid #b4cbe5;
+}
+
+.time-box span {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 23px;
+}
+
+.time-box small {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.closing {
+  font-size: 20px;
+  font-style: italic;
+  margin-top: 24px;
+}
+
+.bottom-flower {
+  margin-top: 22px;
+  height: 2px;
+  width: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #648bb9,
+    transparent
+  );
+}
+
+/* Falling blue petals */
+
+#petal-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+  display: none;
+}
+
+body.opened #petal-container {
+  display: block;
+}
+
+.petal {
+  position: absolute;
+  top: -35px;
+  width: 13px;
+  height: 19px;
+  background: linear-gradient(
+    135deg,
+    #e8f2ff,
+    #8db4df 55%,
+    #4779b2
+  );
+  border-radius: 90% 10% 85% 15%;
+  opacity: 0.85;
+  animation: petalFall linear infinite;
+  box-shadow: 0 1px 4px rgba(25, 56, 94, 0.15);
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translate3d(45px, 50vh, 0) rotate(180deg);
+  }
+
+  100% {
+    transform: translate3d(-35px, 110vh, 0) rotate(420deg);
+    opacity: 0;
+  }
+}
+
+/* Opening curtains */
+
+.curtain {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 51%;
+  z-index: 5;
+  background: repeating-linear-gradient(
+    90deg,
+    #24476f 0px,
+    #4779b2 18px,
+    #a8c5e7 35px,
+    #315b8c 52px
+  );
+  box-shadow: inset -12px 0 25px rgba(20, 42, 70, 0.2);
+  transition: transform 2s cubic-bezier(.65, 0, .35, 1);
+}
+
+.curtain.left {
+  left: 0;
+  border-right: 5px solid #dce9f8;
+}
+
+.curtain.right {
+  right: 0;
+  border-left: 5px solid #dce9f8;
+}
+
+.opening-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
+  background: rgba(225, 237, 251, 0.2);
+  transition: opacity 0.7s ease;
+}
+
+.opening-card {
+  padding: 35px 24px;
+  width: min(100%, 400px);
+  background: rgba(255, 255, 255, 0.97);
+  border: 2px solid #648bb9;
+  box-shadow: 0 10px 35px rgba(25, 56, 94, 0.22);
+}
+
+.opening-card h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 51px;
+  font-weight: 400;
+  color: #315b8c;
+  margin: 10px 0;
+}
+
+.opening-card p {
+  font-size: 19px;
+  margin: 12px 0 22px;
+}
+
+#openButton {
+  border: none;
+  padding: 14px 25px;
+  background: #315b8c;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#openButton:hover {
+  background: #19385e;
+  transform: translateY(-2px);
+}
+
+body.opened .curtain.left {
+  transform: translateX(-100%);
+}
+
+body.opened .curtain.right {
+  transform: translateX(100%);
+}
+
+body.opened .opening-screen {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.opened .opening-card {
+  transform: scale(0.95);
+  transition: transform 0.7s ease;
+}
+
+@media (max-width: 420px) {
+  .invitation {
+    padding: 35px 17px;
+  }
+
+  .message {
+    font-size: 19px;
+  }
+
+  .details {
+    font-size: 19px;
+  }
+
+  .bismillah {
+    font-size: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal {
+    animation-duration: 20s !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+  <section class="invitation">
+
+    <div class="bismillah" lang="ar" dir="rtl">
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    </div>
+
+    <p class="intro">With love and happiness</p>
+
+    <p class="message">
+      We joyfully invite you to celebrate a beautiful evening filled with
+      laughter, blessings and love.
+    </p>
+
+    <div class="divider">✦ ❀ ✦</div>
+
+    <p class="subtitle">Join us for</p>
+
+    <h1>Hanna's Haldi</h1>
+
+    <div class="divider">✦ ✧ ✦</div>
+
+    <div class="details">
+      <strong>Date</strong>
+      Saturday, 12 December 2026
+
+      <strong>Time</strong>
+      8:00 PM
+
+      <strong>Location</strong>
+      Metro Grand Convention Hall,
+      J.P. Nagar, Bengaluru,
+      Karnataka - 560078
+    </div>
+
+    <a
+      class="map-link"
+      href="https://www.google.com/maps/place/Metro+Grand+Convention+hall/@12.915943,77.59709,944m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bae15042d86b5cf:0x5c1a2529c50ed28!8m2!3d12.915943!4d77.5996649!16s%2Fg%2F11c2ntr7gn?entry=ttu&g_ep=EgoyMDI2MTExNy4wIKXMDSoASAFQAw%3D%3D"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      OPEN MAPS
+    </a>
+
+    <p class="countdown-title">Counting down to the celebration</p>
+
+    <div class="countdown" id="countdown" aria-live="polite">
+      <div class="time-box"><span id="days">--</span><small>Days</small></div>
+      <div class="time-box"><span id="hours">--</span><small>Hours</small></div>
+      <div class="time-box"><span id="minutes">--</span><small>Minutes</small></div>
+      <div class="time-box"><span id="seconds">--</span><small>Seconds</small></div>
+    </div>
+
+    <p class="closing">
+      Your presence will make our celebration even more special.
+    </p>
+
+    <div class="bottom-flower"></div>
+
+  </section>
+</main>
+
+<!-- Falling petals -->
+<div id="petal-container"></div>
+
+<!-- Background music -->
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="haldi-music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Curtains -->
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+
+<!-- Opening screen -->
+<div class="opening-screen" id="openingScreen">
+  <div class="opening-card">
+    <h2>Hanna's Haldi</h2>
+    <p>Tap to open your invitation</p>
+    <button id="openButton" type="button">
+      OPEN INVITATION
+    </button>
+  </div>
+</div>
+
+<script>
+const eventDate =
+  new Date("2026-12-12T20:00:00+05:30").getTime();
+
+function updateCountdown() {
+  const now = Date.now();
+  const difference = eventDate - now;
+
+  if (difference <= 0) {
+    document.getElementById("countdown").innerHTML =
+      "<p>The celebration day is here!</p>";
+    return;
+  }
+
+  const days = Math.floor(
+    difference / (1000 * 60 * 60 * 24)
+  );
+
+  const hours = Math.floor(
+    (difference / (1000 * 60 * 60)) % 24
+  );
+
+  const minutes = Math.floor(
+    (difference / (1000 * 60)) % 60
+  );
+
+  const seconds = Math.floor(
+    (difference / 1000) % 60
+  );
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* Create falling petals */
+
+function createPetals() {
+  const container = document.getElementById("petal-container");
+
+  for (let i = 0; i < 28; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration =
+      (7 + Math.random() * 9) + "s";
+
+    petal.style.animationDelay =
+      (-Math.random() * 15) + "s";
+
+    petal.style.width =
+      (8 + Math.random() * 9) + "px";
+
+    petal.style.height =
+      (12 + Math.random() * 12) + "px";
+
+    container.appendChild(petal);
+  }
+}
+
+createPetals();
+
+/* Open invitation */
+
+document.getElementById("openButton").addEventListener(
+  "click",
+  async function () {
+
+    document.body.classList.add("opened");
+
+    const music =
+      document.getElementById("backgroundMusic");
+
+    try {
+      await music.play();
+    } catch (error) {
+      console.log(
+        "Music could not start. Check haldi-music.mp3."
+      );
+    }
+  }
+);
+</script>
+
+</body>
+</html>
+```
+
+
